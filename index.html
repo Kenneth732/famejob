@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Bank Careers · Application</title>
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header / Nav */
+    .top-bar {
+      background: #0a2e4b;
+      color: white;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      background: #ffb800;
+      color: #0a2e4b;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(255, 184, 0, 0.3);
+    }
+
+    .logo-text {
+      font-weight: 600;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .logo-text span {
+      color: #ffb800;
+      font-weight: 300;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffb800;
+      border-bottom-color: #ffb800;
+    }
+
+    .btn-outline-light {
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      background: transparent;
+      color: white;
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-outline-light:hover {
+      background: #ffb800;
+      border-color: #ffb800;
+      color: #0a2e4b;
+    }
+
+    /* Hero / Breadcrumb */
+    .hero {
+      background: linear-gradient(135deg, #0a2e4b 0%, #1a4a6f 100%);
+      color: white;
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      border-bottom: 5px solid #ffb800;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      opacity: 0.85;
+      max-width: 700px;
+      margin: 0.5rem auto;
+      font-size: 1.1rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 1rem;
+    }
+
+    .breadcrumb i {
+      margin: 0 6px;
+      font-size: 0.7rem;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Grid: job list + application card */
+    .career-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* Job cards */
+    .job-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e9edf4;
+      transition: all 0.2s;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .job-card:hover {
+      border-color: #ffb800;
+      box-shadow: 0 12px 24px rgba(255, 184, 0, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .job-card.selected {
+      border-left: 6px solid #ffb800;
+      background: #fffdf7;
+    }
+
+    .job-info h3 {
+      font-size: 1.3rem;
+      color: #0a2e4b;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      color: #5e6f8d;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .job-meta i {
+      color: #ffb800;
+      width: 16px;
+      margin-right: 4px;
+    }
+
+    .job-badge {
+      background: #eef3f9;
+      color: #0a2e4b;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* Payment / Application card */
+    .apply-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 20px 35px -8px rgba(10, 46, 75, 0.12);
+      padding: 2rem 1.8rem;
+      border: 1px solid #e9edf4;
+      position: sticky;
+      top: 1.5rem;
+      transition: 0.2s;
+    }
+
+    .apply-card h2 {
+      font-size: 1.5rem;
+      color: #0a2e4b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+
+    .apply-card h2 i {
+      color: #ffb800;
+    }
+
+    .apply-sub {
+      color: #62748c;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed #d0dae8;
+    }
+
+    .selected-job-name {
+      background: #f0f6fe;
+      padding: 1rem 1.2rem;
+      border-radius: 14px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      color: #0a2e4b;
+      font-size: 1rem;
+    }
+
+    .selected-job-name i {
+      color: #ffb800;
+      font-size: 1.4rem;
+    }
+
+    .fee-box {
+      background: #fff8e7;
+      border-left: 4px solid #ffb800;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .fee-amount {
+      font-size: 1.8rem;
+      color: #0a2e4b;
+    }
+
+    .fee-amount small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #62748c;
+      margin-left: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #0a2e4b;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1.5px solid #d8e2ee;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      background: #fbfdff;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #ffb800;
+      box-shadow: 0 0 0 4px rgba(255, 184, 0, 0.15);
+    }
+
+    .btn-pay {
+      width: 100%;
+      background: #0a2e4b;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem;
+      border: none;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.8rem;
+      box-shadow: 0 8px 18px rgba(10, 46, 75, 0.2);
+    }
+
+    .btn-pay:hover {
+      background: #1a4a6f;
+      transform: scale(1.01);
+    }
+
+    .btn-pay i {
+      color: #ffb800;
+    }
+
+    .btn-pay:disabled {
+      background: #b8c5d4;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #7b8ba3;
+      margin-top: 1rem;
+    }
+
+    .secure-note i {
+      color: #2e7d32;
+    }
+
+    .message {
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .message.success {
+      background: #e6f4ea;
+      color: #1e6b3b;
+      border: 1px solid #b7dfc5;
+      display: block;
+    }
+
+    .message.error {
+      background: #fdeded;
+      color: #b33a3a;
+      border: 1px solid #f5c2c2;
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 950px) {
+      .career-grid {
+        grid-template-columns: 1fr;
+      }
+      .apply-card {
+        position: static;
+        margin-top: 1rem;
+      }
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        padding: 0.8rem 1rem;
+      }
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      .hero {
+        padding: 1.8rem 1rem;
+      }
+      .job-card {
+        padding: 1.2rem;
+      }
+      .apply-card {
+        padding: 1.5rem;
+      }
+      .fee-amount {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* footer */
+    .footer {
+      background: #0a2e4b;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 0.8rem;
+      border-top: 3px solid #ffb800;
+      margin-top: 2rem;
+    }
+
+    .footer i {
+      color: #ffb800;
+      margin: 0 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-bar">
+    <div class="logo-area">
+      <div class="logo-icon">F</div>
+      <div class="logo-text">Family <span>Bank</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Careers</a>
+      <a href="#">Life at Family</a>
+      <a href="#">Graduate</a>
+      <a href="#">FAQs</a>
+    </div>
+    <button class="btn-outline-light"><i class="fas fa-user-circle"></i> Sign in</button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Join our team</h1>
+    <p>Build a career that makes a difference. Explore opportunities at Family Bank.</p>
+    <div class="breadcrumb">
+      <i class="fas fa-home"></i> Home <i class="fas fa-chevron-right"></i> Careers <i class="fas fa-chevron-right"></i> Apply
+    </div>
+  </section>
+
+  <!-- Main -->
+  <div class="container">
+    <div class="career-grid">
+
+      <!-- Job list (left) -->
+      <div class="job-list" id="jobList">
+        <div class="job-card selected" data-job="Relationship Manager – Retail Banking" data-fee="1500">
+          <div class="job-info">
+            <h3>Relationship Manager – Retail Banking</h3>
+            <div class="job-meta">
+              <span><i class="fas fa-map-pin"></i> Nairobi, Kenya</span>
+              <span><i class="fas fa-clock"></i> Full-time</span>
+              <span><i class="fas fa-calendar-alt"></i> Closes 30 Apr 2025</span>
+            </div>
+          </div>
+          <div class="job-badge">Apply</div>
+        </div>
+
+        <div class="job-card" data-job="Digital Banking Officer" data-fee="1200">
+          <div class="job-info">
+            <h3>Digital Banking Officer</h3>
+            <div class="job-meta">
+              <span><i class="fas fa-map-pin"></i> Nairobi, Kenya</span>
+              <span><i class="fas fa-clock"></i> Full-time</span>
+              <span><i class="fas fa-calendar-alt"></i> Closes 15 May 2025</span>
+            </div>
+          </div>
+          <div class="job-badge">Apply</div>
+        </div>
+
+        <div class="job-card" data-job="Credit Analyst" data-fee="1800">
+          <div class="job-info">
+            <h3>Credit Analyst</h3>
+            <div class="job-meta">
+              <span><i class="fas fa-map-pin"></i> Mombasa, Kenya</span>
+              <span><i class="fas fa-clock"></i> Full-time</span>
+              <span><i class="fas fa-calendar-alt"></i> Closes 20 May 2025</span>
+            </div>
+          </div>
+          <div class="job-badge">Apply</div>
+        </div>
+
+        <div class="job-card" data-job="Customer Service Representative" data-fee="1000">
+          <div class="job-info">
+            <h3>Customer Service Representative</h3>
+            <div class="job-meta">
+              <span><i class="fas fa-map-pin"></i> Kisumu, Kenya</span>
+              <span><i class="fas fa-clock"></i> Full-time</span>
+              <span><i class="fas fa-calendar-alt"></i> Closes 10 May 2025</span>
+            </div>
+          </div>
+          <div class="job-badge">Apply</div>
+        </div>
+      </div>
+
+      <!-- Application / payment card (right) -->
+      <div class="apply-card" id="applyCard">
+        <h2><i class="fas fa-file-signature"></i> Application</h2>
+        <div class="apply-sub">Complete your details to proceed</div>
+
+        <div class="selected-job-name" id="selectedJobDisplay">
+          <i class="fas fa-briefcase"></i> <span>Relationship Manager – Retail Banking</span>
+        </div>
+
+        <div class="form-group">
+          <label>Full name</label>
+          <input type="text" id="fullName" placeholder="e.g. Jane Wanjiru" value="John M. Doe">
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" id="email" placeholder="you@example.com" value="john.doe@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="tel" id="phone" placeholder="+254 7XX XXX XXX" value="+254 712 345 678">
+        </div>
+
+        <div class="fee-box">
+          <span><i class="fas fa-shield-alt" style="color:#ffb800; margin-right: 6px;"></i> Application fee</span>
+          <span class="fee-amount" id="feeDisplay">KSh 1,500<small> (incl. tax)</small></span>
+        </div>
+
+        <button class="btn-pay" id="payBtn">
+          <i class="fas fa-lock"></i> Pay & submit application
+        </button>
+
+        <div class="secure-note">
+          <i class="fas fa-check-circle"></i> Secure M-Pesa / card payment
+        </div>
+
+        <!-- message feedback -->
+        <div id="messageBox" class="message"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <i class="fas fa-copyright"></i> 2025 Family Bank Limited. All rights reserved. <i class="fas fa-umbrella"></i> Career portal demo.
+  </div>
+
+  <script>
+    (function() {
+      // DOM elements
+      const jobCards = document.querySelectorAll('.job-card');
+      const selectedJobDisplay = document.getElementById('selectedJobDisplay');
+      const feeDisplay = document.getElementById('feeDisplay');
+      const payBtn = document.getElementById('payBtn');
+      const messageBox = document.getElementById('messageBox');
+      const fullNameInput = document.getElementById('fullName');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+
+      let currentJob = {
+        title: 'Relationship Manager – Retail Banking',
+        fee: 1500
+      };
+
+      // Helper to update the UI based on selected job
+      function updateSelectedJob(title, fee) {
+        currentJob.title = title;
+        currentJob.fee = fee;
+
+        // Update display card
+        selectedJobDisplay.innerHTML = `<i class="fas fa-briefcase"></i> <span>${title}</span>`;
+        feeDisplay.innerHTML = `KSh ${fee.toLocaleString()}<small> (incl. tax)</small>`;
+
+        // Remove selected class from all, add to matching card
+        jobCards.forEach(card => {
+          card.classList.remove('selected');
+          if (card.dataset.job === title) {
+            card.classList.add('selected');
+          }
+        });
+
+        // Clear any previous messages when job changes
+        messageBox.className = 'message';
+        messageBox.textContent = '';
+        messageBox.style.display = 'none';
+      }
+
+      // Event listeners on job cards
+      jobCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          const title = this.dataset.job;
+          const fee = parseInt(this.dataset.fee, 10);
+          updateSelectedJob(title, fee);
+        });
+      });
+
+      // Pay button handler
+      payBtn.addEventListener('click', function() {
+        const fullName = fullNameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+
+        // Reset message
+        messageBox.className = 'message';
+        messageBox.style.display = 'none';
+
+        // Validation
+        if (!fullName || fullName.length < 3) {
+          messageBox.textContent = 'Please enter your full name (at least 3 characters).';
+          messageBox.className = 'message error';
+          return;
+        }
+
+        if (!email || !email.includes('@') || !email.includes('.')) {
+          messageBox.textContent = 'Please enter a valid email address.';
+          messageBox.className = 'message error';
+          return;
+        }
+
+        if (!phone || phone.length < 8) {
+          messageBox.textContent = 'Please enter a valid phone number.';
+          messageBox.className = 'message error';
+          return;
+        }
+
+        // Simulate payment processing (like a gateway)
+        payBtn.disabled = true;
+        payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing payment...';
+
+        // Simulate network delay
+        setTimeout(() => {
+          // Payment success (simulate realistic response)
+          // In a real scenario, you would integrate with a payment API.
+          messageBox.textContent = `✅ Payment of KSh ${currentJob.fee.toLocaleString()} received! Your application for "${currentJob.title}" has been submitted.`;
+          messageBox.className = 'message success';
+
+          // Reset button state
+          payBtn.disabled = false;
+          payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay & submit application';
+
+          // Optionally, you could clear or change UI here
+          // Keep the selected job & fee as is.
+        }, 1800); // realistic delay
+      });
+
+      // Initialize with the first selected job (already marked in HTML, but ensure fee correct)
+      // The first card has data-fee="1500" and is selected.
+      // Make sure display matches initial (in case of hardcoded values)
+      const initialSelected = document.querySelector('.job-card.selected');
+      if (initialSelected) {
+        const initTitle = initialSelected.dataset.job;
+        const initFee = parseInt(initialSelected.dataset.fee, 10);
+        // but we also want to sync the currentJob object
+        currentJob.title = initTitle;
+        currentJob.fee = initFee;
+        // Update display if necessary (already correct in HTML but just in case)
+        selectedJobDisplay.innerHTML = `<i class="fas fa-briefcase"></i> <span>${initTitle}</span>`;
+        feeDisplay.innerHTML = `KSh ${initFee.toLocaleString()}<small> (incl. tax)</small>`;
+      }
+
+      // Extra: simulate that the apply card is sticky and reacts
+      // Also, clicking on the job-badge inside a card doesn't cause double event, but it's fine
+      // (event bubbles to card)
+    })();
+  </script>
+</body>
+</html>
